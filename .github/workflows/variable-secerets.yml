@@ -7,13 +7,12 @@ env:
     CONTAINER_REGISTRY: docker.io
     IMAGE_NAME: github-actions-nginx
 ######### envrionment variables at the Workflow level  #########
-
 jobs:
   docker:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps: 
     - name: Docker Build
-      run: echo docker build -t ${{ env.CONTAINER_REISTRY }}/$DOCKER_USERNAME/$IMAGE_NAME:latest
+      run: echo docker build -t ${{ env.CONTAINER_REGISTRY }}/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
     - name: Docker Login
       env:  
