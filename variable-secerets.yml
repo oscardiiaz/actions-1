@@ -1,0 +1,96 @@
+name: Exploring Variables and Secerets
+
+on:
+    push
+
+env:
+    CONTAINER_REGISTRY: docker.io
+    IMAGE_NAME: github-actions-nginx
+######### envrionment variables at the Workflow level  #########
+
+jobs:
+  docker:
+    run-on: ubuntu-latest
+    steps: 
+    - name: Docker Build
+      run: echo docker build -t ${{ env.CONTAINER_REISTRY }}/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+    - name: Docker Login
+      env:  
+      run: echo docker login --username=$DOCKER_USERNAME --password=${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Docker Publish
+      run: echo docker push $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker run
+      run: echo docker run -d -p 8080:80 $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+######### envrionment variables at the JOB level  #########
+  # docker:
+  #   env:
+  #       CONTAINER_REGISTRY: docker.io
+  #       DOCKER_USERNAME:
+  #       IMAGE_NAME: github-actions-nginx
+  #   run-on: ubuntu-latest
+  #   steps: 
+  #   - name: Docker Build
+  #     run: echo docker build -t $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+  #   - name: Docker Login
+  #     env:  
+  #       DOCKER_PASSWORD: s3cUrePaSsw0rd
+  #     run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+
+  #   - name: Docker Publish
+  #     run: echo docker push $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+  # deploy:
+  #   env:
+  #       CONTAINER_REGISTRY: docker.io
+  #       DOCKER_USERNAME: 
+  #       IMAGE_NAME: github-actions-nginx
+  #   needs: docker
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Docker run
+  #     run: echo docker run -d -p 8080:80 $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+######### envrionment variables at the STEP level  #########
+
+  # docker:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Docker Build
+  #     env:
+  #       CONTAINER_REGISTRY: docker.io
+  #       DOCKER_USERNAME: 
+  #       IMAGE_NAME: github-actions-nginx
+  #     run: echo docker build -t $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+  #   - name: Docker Login
+  #     env:
+  #       DOCKER_PASSWORD: s3cUrePaSsw0rd
+  #       DOCKER_USERNAME: 
+  #     run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+
+  #   - name: Docker Publish
+  #     env:
+  #       CONTAINER_REGISTRY: docker.io
+  #       DOCKER_USERNAME:
+  #       IMAGE_NAME: github-actions-nginx
+  #     RUN: echo docker build -t $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+  # deploy:
+  #   needs: docker
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Docker run
+  #     env:
+  #       CONTAINER_REGISTRY: docker.io
+  #       DOCKER_USERNAME:
+  #       IMAGE_NAME: github-actions-nginx
+  #     RUN: echo docker RUN -D -P 8080:80 $CONTAINER_REISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
