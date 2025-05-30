@@ -18,7 +18,7 @@ jobs:
         with:
           name: dragon-text-file
           path: dragon.txt
-		  # added the following so that theh file wouldn't be uploaded as a zip file.
+# added the following so that theh file wouldn't be uploaded as a zip file.
           compression-level: 0
 
   test_job_2:
