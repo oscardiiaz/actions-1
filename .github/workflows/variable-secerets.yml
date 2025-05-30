@@ -15,7 +15,6 @@ jobs:
       run: echo docker build -t ${{ env.CONTAINER_REGISTRY }}/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
     - name: Docker Login
-      env:  
       run: echo docker login --username=$DOCKER_USERNAME --password=${{ secrets.DOCKER_PASSWORD }}
 
     - name: Docker Publish
