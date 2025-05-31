@@ -7,10 +7,24 @@ on:
 jobs:
     deploy:
         strategy:
+# fail-fast, true by defualt, cancel any jobs which are running in queue when a job fails
+            fail-fast: false
+# max-parallel: number of jobs you wawnt to run concurrently, in this instance it will run 2 jobs at a time until it completes all 6 jobs
+            max-parallel: 2
             matrix:
 # this is not a tag but whatever you want to use, docker comes preinstalled on all virtual machines
-                os: [ubuntu-latest, ubunut-20.04, windows-latest] 
-                images: [hello-world, alpine] 
+              os: [ubuntu-latest, ubunut-20.04, windows-latest] 
+# don't want alpine to be installed on windows-latest due to prevoius failure
+#                images: [hello-world, alpine] 
+              images: [hello-world, alpine] 
+# added exclude method
+              exclude: 
+                - images: alpine
+                  os: windows-latest 
+# added include method
+              include:
+                - images: amd64/alpine
+                  os: ubunut-20.04
         runs-on: ${{ matrix.os }}
         steps:
         - name: Echo Docker Details
