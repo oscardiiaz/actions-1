@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
     # schedule:
     #     - cron: "*/59 * * * *"
-    push:
+    push:                   # this automatically executed becasue we made a push to the main branch
         branches:
             - main
             - '!feature/*' # ignoring pushing to any branch name starting with feature using !
