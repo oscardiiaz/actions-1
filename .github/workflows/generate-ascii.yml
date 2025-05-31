@@ -1,7 +1,7 @@
 name: Generate ASCII Artwork
 
 on:
-  push
+#  push
 
 jobs:
   build_job_1:
@@ -18,7 +18,7 @@ jobs:
         with:
           name: dragon-text-file
           path: dragon.txt
-# added the following so that theh file wouldn't be uploaded as a zip file.
+# added the following compression-level method but doens't work, the remaining will fail becuase you will need to download the zip then extract the file then read.
           compression-level: 0
 
   test_job_2:
