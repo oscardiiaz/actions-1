@@ -1,7 +1,8 @@
 name: Exploring Variables and Secerets
 
 on:
-#    push
+#   push 
+    workflow_dispatch:
 
 env:
     CONTAINER_REGISTRY: docker.io
@@ -19,8 +20,11 @@ jobs:
 
     - name: Docker Publish
       run: echo docker push $CONTAINER_REISTRY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
-
+# Video Section "Using if expressions in Jobs"
+# Example is to only use the following when commiting to main branch
+# How to dpeloy to different environments
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: docker
     runs-on: ubuntu-latest
     steps:
