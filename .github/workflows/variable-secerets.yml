@@ -1,7 +1,7 @@
 name: Exploring Variables and Secerets
 
 on:
-    push
+#    push
 
 env:
     CONTAINER_REGISTRY: docker.io
