@@ -1,8 +1,12 @@
 name: Exploring Variables and Secerets
 
 on:
-   push 
+
+#   push 
 #  workflow_dispatch:
+=======
+#    push
+     workflow_dispatch:
 
 env:
     CONTAINER_REGISTRY: docker.io
